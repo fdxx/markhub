@@ -11,7 +11,7 @@
 ```bash
 git clone https://github.com/fdxx/markhub
 cd markhub
-node install
+npm install
 
 ## Copy the configuration file and edit it.
 cp config.example.yaml config.yaml
