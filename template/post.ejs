@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="<%= site['language'] %>">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+   <meta name="description" content="<%= postinfo['description'] %>">
+   <title><%= postinfo['title'] %> - <%= site['title'] %></title>
+
+   <meta property="og:title" content="<%= postinfo['title'] %>">
+   <meta property="og:type" content="article">
+   <meta property="og:url" content="<%= `${site['url']}${postinfo['link']}` %>">
+   <meta property="og:description" content="<%= postinfo['description'] %>">
+
+   <script type="application/ld+json">
+   <%- postinfo.structured %>
+   </script>
+
+   <link rel="icon" type="image/x-icon" href="<%= site['favicon'] %>">
+   <%_ for (const value of site['css']) { _%>
+   <link rel="stylesheet" href="<%= value %>">
+   <%_ } _%>
+</head>
+<body>
+   <header class="header">
+      <nav class="nav_container">
+         <div>
+            <a href="<%= site['root'] %>" class="nav_title"><%= site['title'] %></a>
+         </div>
+         <div>
+            <%_ let menu_separator = ""; _%>
+            <%_ for (const i in navigation) { _%>
+            <%- menu_separator %>
+            <a href="<%= navigation[i]['link'] %>" class="nav_menu"><%= i %></a>
+            <%_ menu_separator = "<span> | </span>"; _%>
+            <%_ } _%>
+         </div>
+      </nav>
+   </header>
+   <main>
+      <article>
+         <header class="postinfo_container" style="text-align: center">
+            <div class="postinfo_title"><%= postinfo['title'] %></a></div>
+            <div class="postinfo_meta">
+               <i class="ri-calendar-schedule-line"></i> <%= translate['published'] %> <%= postinfo['date'] %>
+               <%_ if (waline && waline['enable'] && postinfo['comments'] && waline['pageview']) { _%>
+               | <i class="ri-eye-line"></i> <%= translate['pageviews'] %> <span class="waline-pageview-count"></span>
+               <%_ } _%>
+               <%_ if (pagecounter && pagecounter['enable']) { _%>
+               | <i class="ri-eye-line"></i> <%= translate['pageviews'] %> <span class="pageviews"></span>
+               <%_ } _%>
+            </div>
+         </header>
+         <section class="markdown-body">
+            <%- postinfo['content'] %>
+         </section>
+         <section class="post_tags_container">
+            <%_ for (const value of postinfo.tags) { _%>
+            <div class="post_tag"><a href="<%= `${site['root']}tags/${value}/` %>"><i class="ri-price-tag-3-line"></i> <%= value %></a></div> 
+            <%_ } _%>
+         </section>
+      </article>
+      <%_ if (waline && waline['enable'] && postinfo['comments']) { _%>
+      <section>
+      <link rel="stylesheet" href="<%= waline['cssUrl'] %>">
+      <div id="waline" class="comment_waline"></div>
+      <script type="module">
+         import { init as walineInit } from '<%= waline['libUrl'] %>';
+         const waline = walineInit(<%- JSON.stringify(waline, null, 0); %>);
+      </script>
+      </section>
+      <%_ } _%>
+      
+      <%_ if (giscus && giscus['enable'] && postinfo['comments']) { _%>
+      <section>
+         <div id="giscus" class="comment_giscus"></div>
+         <script src="https://giscus.app/client.js"
+            data-repo="<%= giscus['data-repo'] %>"
+            data-repo-id="<%= giscus['data-repo-id'] %>"
+            data-category="<%= giscus['data-category'] %>"
+            data-category-id="<%= giscus['data-category-id'] %>"
+            data-mapping="<%= giscus['data-mapping'] %>"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="<%= giscus['data-lang'] || site['language'] %>"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+         </script>
+      </section>
+      <%_ } _%>
+   </main>
+   <footer>
+      <%- footer['content'] %>
+   </footer>
+   
+   <%_ if (pagecounter && pagecounter['enable']) { _%>
+   <script>
+      async function RecordPageView() {
+         <%_ const domain = pagecounter['domain'] !== undefined ? `'${pagecounter['domain']}'` : 'window.location.hostname'; _%>
+         const response = await fetch('<%= pagecounter['server'] %>', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domain: <%- domain %>, path: '<%- postinfo['link'] %>' })
+         });
+         const data = await response.json();
+         document.querySelector('.pageviews').textContent = data.count;
+      }
+   
+      window.addEventListener("load", () => {
+         RecordPageView();
+      });
+   </script>
+   <%_ } _%>
+
+   <%_ for (const value of site['js']) { _%>
+   <script defer src="<%= value %>"></script>
+   <%_ } _%>
+</body>
+</html>
+
+

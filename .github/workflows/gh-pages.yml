@@ -1,0 +1,41 @@
+name: GitHub Pages
+
+on:
+  push:
+    paths-ignore:
+      - LICENSE
+      - README.md
+  pull_request:
+    paths-ignore:
+      - LICENSE
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+
+    steps:
+      - name: Getting own repository
+        uses: actions/checkout@v4
+        with:
+          path: src
+
+      - name: Converts helloworld.md
+        working-directory: src
+        run: |
+          npm install
+          cd example-site
+          node ../index.js
+          
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: src/public
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="<%= site['language'] %>">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+   <meta name="description" content="<%= site['title'] %>">
+   <title><%= site['title'] %></title>
+
+   <meta property="og:title" content="<%= site['title'] %>">
+   <meta property="og:type" content="website">
+   <meta property="og:description" content="<%= site['title'] %>">
+
+   <link rel="icon" type="image/x-icon" href="<%= site['favicon'] %>">
+   <%_ for (const value of site['css']) { _%>
+   <link rel="stylesheet" href="<%= value %>">
+   <%_ } _%>
+</head>
+<body>
+   <header class="header">
+      <nav class="nav_container">
+         <div>
+            <a href="<%= site['root'] %>" class="nav_title"><%= site['title'] %></a>
+         </div>
+         <div>
+            <%_ let menu_separator = ""; _%>
+            <%_ for (const i in navigation) { _%>
+            <%- menu_separator %>
+            <a href="<%= navigation[i]['link'] %>" class="nav_menu"><%= i %></a>
+            <%_ menu_separator = "<span> | </span>"; _%>
+            <%_ } _%>
+         </div>
+      </nav>
+   </header>
+   <main>
+      <%_ for (const value of arrayPostInfoPart) { _%>
+      <section class="postinfo_container">
+         <div class="postinfo_title"><a href="<%= value['link'] %>"><%= value['title'] %></a></div>
+         <div class="postinfo_meta"><i class="ri-calendar-schedule-line"></i> <%= translate['published'] %> <%= value['date'] %></div>
+         <div class="markdown-body postinfo_excerpt">
+            <%- value.excerpt _%>
+         </div>
+         <div class="postinfo_readmore"><a href="<%= value['link'] %>"><%= translate['readmore'] %> &raquo;</a></div>
+      </section>
+      <%_ } _%>
+
+      <section class="pagination_container">
+         <%_ if (PrevPageLink.length > 0) { _%>
+         <div class="pagination_arrow"><a href="<%= PrevPageLink %>"><i class="ri-arrow-left-s-line"></i></a></div>
+         <%_ } _%>
+         <%_ for (const value of arrayPagination) { _%>
+         <%_ const current = (value['isCurrent']) ? " current" : "" _%>
+         <div class="pagination<%= current %>"><a href="<%= value['link'] %>"><%= value['number'] %></a></div>
+         <%_ } _%>
+         <%_ if (NextPageLink.length > 0) { _%>
+         <div class="pagination_arrow"><a href="<%= NextPageLink %>"><i class="ri-arrow-right-s-line"></i></a></div>
+         <%_ } _%>
+      </section>
+   </main>
+   <footer>
+      <%- footer['content'] %>
+   </footer>
+   <%_ for (const value of site['js']) { _%>
+   <script defer src="<%= value %>"></script>
+   <%_ } _%>
+</body>
+</html>
+
+

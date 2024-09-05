@@ -1,0 +1,26 @@
+{
+  "name": "markhub",
+  "description": "https://github.com/fdxx/markhub",
+  "version": "0.1",
+  "author": "fdxx",
+  "license": "GPLv3",
+  "type": "module",
+  "homepage": "https://github.com/fdxx/markhub",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fdxx/markhub.git"
+  },
+  "dependencies": {
+    "@mdit/plugin-alert": "^0.13.0",
+    "@mdit/plugin-footnote": "^0.13.0",
+    "@mdit/plugin-img-lazyload": "^0.13.0",
+    "@mdit/plugin-katex": "^0.13.1",
+    "@mdit/plugin-tab": "^0.13.0",
+    "@mdit/plugin-tasklist": "^0.13.0",
+    "ejs": "^3.1.10",
+    "highlight.js": "^11.10.0",
+    "markdown-it": "^14.1.0",
+    "minimist": "^1.2.8",
+    "yaml": "^2.5.0"
+  }
+}

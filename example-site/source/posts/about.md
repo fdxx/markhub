@@ -1,5 +1,9 @@
-## About
-[MarkHub](https://github.com/fdxx/markhub), A simple blog system built with nodejs. It parses the Markdown file into an HTML file and outputs it to the specified directory. You need to use nginx etc. to present your website.
+---
+title: 'About'
+date: '2024-08-15'
+---
+
+[MarkHub](https://github.com/fdxx/markhub), A simple blog system built with nodejs. <!-- more --> It parses the Markdown file into an HTML file and outputs it to the specified directory. You need to use nginx etc. to present your website.
 
 ### [Preview](https://fdxx.github.io/markhub)
 
@@ -32,7 +36,6 @@ node index.js --config "path/to/config.yaml" --noclean
 
 ## Front-matter
 At the beginning of the post, surround the yaml block with `---`
-
 ```yaml
 ---
 ## Post Title
