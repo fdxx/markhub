@@ -72,3 +72,15 @@ resources:
 draft: false
 ---
 ```
+
+## Credit
+- [markdown-it](https://github.com/markdown-it/markdown-it)
+- [mdit-plugins](https://github.com/mdit-plugins/mdit-plugins)
+- [highlightjs](https://github.com/highlightjs/highlight.js)
+- [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
+- [RemixIcon](https://github.com/Remix-Design/RemixIcon)
+
+## Design Reference
+- [hexo](https://github.com/hexojs/hexo)
+- [hexo-theme-next](https://github.com/next-theme/hexo-theme-next)
+
