@@ -25,6 +25,11 @@ jobs:
         with:
           path: src
 
+      - name: node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: build
         working-directory: src
         run: |
