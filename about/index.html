@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+   <meta name="description" content="About">
+   <title>About - MarkHub</title>
+
+   <meta property="og:title" content="About">
+   <meta property="og:type" content="article">
+   <meta property="og:url" content="https://fdxx.github.io/markhub/about/">
+   <meta property="og:description" content="About">
+
+   <script type="application/ld+json">
+   {"@context":"https://schema.org","@type":"BlogPosting","headline":"About","datePublished":"2024-08-15","dateModified":"2024-08-15","author":{"@type":"Person","name":"fdxx"}}
+   </script>
+
+   <link rel="icon" type="image/x-icon" href="/markhub/assets/images/favicon.ico">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.6.1/github-markdown.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+   <link rel="stylesheet" href="/markhub/assets/css/highlight-github.css">
+   <link rel="stylesheet" href="/markhub/assets/css/main.css">
+</head>
+<body>
+   <header class="header">
+      <nav class="nav_container">
+         <div>
+            <a href="/markhub/" class="nav_title">MarkHub</a>
+         </div>
+         <div>
+            
+            <a href="/markhub/" class="nav_menu">Home</a>
+            <span> | </span>
+            <a href="/markhub/archive/" class="nav_menu">Archive</a>
+            <span> | </span>
+            <a href="/markhub/tags/" class="nav_menu">Tags</a>
+            <span> | </span>
+            <a href="/markhub/about/" class="nav_menu">About</a>
+         </div>
+      </nav>
+   </header>
+   <main>
+      <article>
+         <header class="postinfo_container" style="text-align: center">
+            <div class="postinfo_title">About</a></div>
+            <div class="postinfo_meta">
+               <i class="ri-calendar-schedule-line"></i> Published 2024-08-15
+               | <i class="ri-eye-line"></i> Pageviews <span class="pageviews"></span>
+            </div>
+         </header>
+         <section class="markdown-body">
+            <p><a href="https://github.com/fdxx/markhub">MarkHub</a>, A simple blog system built with nodejs. <!-- more --> It parses the Markdown file into an HTML file and outputs it to the specified directory. You need to use nginx etc. to present your website.</p>
+<h3><a href="https://fdxx.github.io/markhub">Preview</a></h3>
+<h2>Features</h2>
+<ul>
+<li>Easily write articles using markdown syntax.</li>
+<li>github css theme styles.</li>
+</ul>
+<h2>build</h2>
+<pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/fdxx/markhub
+<span class="hljs-built_in">cd</span> markhub
+node install
+
+<span class="hljs-comment">## Copy the configuration file and edit it.</span>
+<span class="hljs-built_in">cp</span> config.example.yaml config.yaml
+
+<span class="hljs-comment">## build</span>
+node index.js
+</code></pre>
+<h2>Command Parameter</h2>
+<ul>
+<li><strong>config</strong>: Specify config file path. default value <code>./config.yaml</code>. For config instructions, see <code>config.example.yaml</code>.</li>
+<li><strong>noclean</strong>: By default, all files in <code>config.site.push_dir</code> are deleted before building, specify this parameter to prevent deletion of the.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-bash">node index.js --config <span class="hljs-string">&quot;path/to/config.yaml&quot;</span> --noclean
+</code></pre>
+<h2>Front-matter</h2>
+<p>At the beginning of the post, surround the yaml block with <code>---</code></p>
+<pre><code class="language-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-comment">## Post Title</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;Hello World&#x27;</span>
+
+<span class="hljs-comment">## Default value: config.site.author</span>
+<span class="hljs-attr">author:</span> <span class="hljs-string">&#x27;fdxx&#x27;</span>
+
+<span class="hljs-comment">## description. Default value: title</span>
+<span class="hljs-comment">## If the body does not have a &#x27;&lt;!-- more --&gt;&#x27; , this value is also used as excerpt</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;some description&#x27;</span>
+
+<span class="hljs-comment">## Published date. Default value: file last modified date.</span>
+<span class="hljs-attr">date:</span> <span class="hljs-string">&#x27;2024-09-01&#x27;</span>
+
+<span class="hljs-comment">## last modified date. Default value: date</span>
+<span class="hljs-attr">lastmod:</span> <span class="hljs-string">&#x27;2024-09-05&#x27;</span>
+
+<span class="hljs-comment">## Enables comment feature for the post. Default value: true</span>
+<span class="hljs-attr">comments:</span> <span class="hljs-literal">true</span>
+
+<span class="hljs-comment">## Tags. Default value: none</span>
+<span class="hljs-attr">tags:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;test1&#x27;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;test2&#x27;</span>
+
+<span class="hljs-comment">## After building, these files are copied to the corresponding post directory.</span>
+<span class="hljs-comment">## If it is a relative path, it will be find from the current md file path.</span>
+<span class="hljs-attr">resources:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;pexels-dreamypixel-547115.jpg&#x27;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;pexels-lazarevkirill-9801136.jpg&#x27;</span>
+
+<span class="hljs-comment">## If it is a draft, it will not be output. Default value: false</span>
+<span class="hljs-attr">draft:</span> <span class="hljs-literal">false</span>
+<span class="hljs-meta">---
+</span></code></pre>
+
+         </section>
+         <section class="post_tags_container">
+         </section>
+      </article>
+      
+      <section>
+         <div id="giscus" class="comment_giscus"></div>
+         <script src="https://giscus.app/client.js"
+            data-repo="fdxx/markhub"
+            data-repo-id="R_kgDOMq6IwA"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOMq6IwM4CiG-h"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+         </script>
+      </section>
+   </main>
+   <footer>
+      <p>2024 © fdxx. Built with <a href="https://github.com/fdxx/markhub">markhub</a></p>
+   </footer>
+   
+   <script>
+      async function RecordPageView() {
+         const response = await fetch('https://pagecounter-rho.vercel.app/pageviews', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domain: 'fdxx.github.io', path: '/markhub/about/' })
+         });
+         const data = await response.json();
+         document.querySelector('.pageviews').textContent = data.count;
+      }
+   
+      window.addEventListener("load", () => {
+         RecordPageView();
+      });
+   </script>
+
+   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+   <script defer src="/markhub/assets/js/main.js"></script>
+</body>
+</html>
+
+
