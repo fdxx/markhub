@@ -25,7 +25,7 @@ jobs:
         with:
           path: src
 
-      - name: Converts helloworld.md
+      - name: build
         working-directory: src
         run: |
           npm install
