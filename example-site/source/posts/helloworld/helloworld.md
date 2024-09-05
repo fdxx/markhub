@@ -143,10 +143,10 @@ echo '"quoted"' | tr -d \" > text.txt
 
 ## Footnotes
 Here is a simple footnote[^1].  
-A footnote can also have multiple lines[^2].
+The footnote will appear at the bottom[^2].
 
 [^1]: My reference.
-[^2]: To add line breaks within a footnote.
+[^2]: Good night makabaka.
 
 ## Collapsed sections
 <details>
