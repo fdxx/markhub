@@ -184,6 +184,10 @@ main {
   display: block;
 }
 
+.markdown-body li+li {
+  margin-top: .1em;
+}
+
 
 .footnotes-sep {
   display: none;
