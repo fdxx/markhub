@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://fdxx.github.io/markhub/helloworld/</loc>
-      <lastmod>2024-09-05</lastmod>
+      <loc>https://fdxx.github.io/markhub/</loc>
+      <lastmod>2024-09-06</lastmod>
       <changefreq>weekly</changefreq>
    </url>
    <url>
-      <loc>https://fdxx.github.io/markhub/</loc>
+      <loc>https://fdxx.github.io/markhub/helloworld/</loc>
       <lastmod>2024-09-05</lastmod>
       <changefreq>weekly</changefreq>
    </url>
