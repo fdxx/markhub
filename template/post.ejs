@@ -105,12 +105,12 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ domain: <%- domain %>, path: '<%- postinfo['link'] %>' })
          });
-         const data = await response.json();
-         document.querySelector('.pageviews').textContent = data.count;
+         const result = await response.json();
+         document.querySelector('.pageviews').textContent = result.data.count;
       }
    
       window.addEventListener("load", () => {
-         RecordPageView();
+         RecordPageView().catch(err => console.error(err));
       });
    </script>
    <%_ } _%>

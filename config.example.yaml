@@ -74,7 +74,7 @@ translate:
 pagecounter:
   enable: true
   ## server uri
-  server: 'https://pagecounter-rho.vercel.app/pageviews'
+  server: 'https://exp.com/pageviews'
 
   ## Specify domain value, default value: window.location.hostname
   ##domain: 'fdxx.github.io'
