@@ -75,7 +75,7 @@ translate:
 pagecounter:
   enable: true
   ## server uri
-  server: 'https://pagecounter.a778229661.workers.dev/pageviews'
+  server: 'https://pagecounter.fdxx.workers.dev/pageviews'
 
   ## Specify domain value, default value: window.location.hostname
   domain: 'fdxx.github.io'
