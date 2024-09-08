@@ -1,5 +1,5 @@
 ## About
-[MarkHub](https://github.com/fdxx/markhub), A simple blog system built with nodejs. It parses the Markdown file into an HTML file and outputs it to the specified directory. You need to use nginx etc. to present your website.
+[MarkHub](https://github.com/fdxx/markhub), A simple blog system built with nodejs. It parses the Markdown file into an HTML file and outputs it to the specified directory. 
 
 ### [Preview](https://fdxx.github.io/markhub)
 

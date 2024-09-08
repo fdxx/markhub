@@ -71,7 +71,7 @@ translate:
 
 
 ## pagecounter. Show post views
-## https://github.com/fdxx/pagecounter.
+## https://github.com/fdxx/pagecounter
 pagecounter:
   enable: true
   ## server uri
