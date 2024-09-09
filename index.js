@@ -349,6 +349,18 @@ function BuildSiteMap(config, arrayPostInfo) {
 	fs.writeFileSync(outfile, output);
 }
 
+function Build404Page(config) {
+	const data = {
+		site: config['site'],
+		navigation: config['navigation']
+	};
+
+	const outfile = Path.join(config['site']['push_dir'], "404.html");
+	const template = fs.readFileSync(Path.join(__dirname, "template", "404.ejs"), 'utf8');
+	const output = ejs.render(template, data);
+	fs.writeFileSync(outfile, output);
+}
+
 function ParsePostsDir(dirents, config, arrayPostInfo) {
 	for (const entry of dirents) {
 
@@ -413,11 +425,14 @@ function main() {
 
 	BuildTagsCloud(config, arrayPostInfo);
 	BuildSiteMap(config, arrayPostInfo);
+	Build404Page(config);
 
 	fs.cpSync(Path.join(__dirname, "assets"), Path.join(config['site']['push_dir'], "assets"), { recursive: true });
 	for (const value of config['site']['copy_dir']) {
 		fs.cpSync(value['source'], value['dest'], { recursive: true });
 	}
+
+	console.log("done!");
 }
 
 main();

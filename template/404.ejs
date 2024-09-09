@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="<%= site['language'] %>">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+   <meta name="description" content="404 Page">
+   <title>404 - <%= site['title'] %></title>
+
+   <link rel="icon" type="image/x-icon" href="<%= site['favicon'] %>">
+   <%_ for (const value of site['css']) { _%>
+   <link rel="stylesheet" href="<%= value %>">
+   <%_ } _%>
+</head>
+<body>
+   <header class="header">
+      <nav class="nav_container">
+         <div>
+            <a href="<%= site['root'] %>" class="nav_title"><%= site['title'] %></a>
+         </div>
+         <div>
+            <%_ let menu_separator = ""; _%>
+            <%_ for (const i in navigation) { _%>
+            <%- menu_separator %>
+            <a href="<%= navigation[i]['link'] %>" class="nav_menu"><%= i %></a>
+            <%_ menu_separator = "<span> | </span>"; _%>
+            <%_ } _%>
+         </div>
+      </nav>
+   </header>
+   <main>
+      <div style="margin: 0 auto; max-width: 600px;">
+         <!-- Image credits: storyset -->
+         <img src="/assets/images/404.svg" alt="Page not found"> 
+     </div>
+   </main>
+</body>
+</html>
+
+
