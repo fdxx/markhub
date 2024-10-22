@@ -1,15 +1,9 @@
 name: GitHub Pages
 
 on:
-  push:
-    paths-ignore:
-      - LICENSE
-      - README.md
-  pull_request:
-    paths-ignore:
-      - LICENSE
-      - README.md
   workflow_dispatch:
+  push:
+    paths: pushbuild.txt
 
 jobs:
   deploy:

@@ -381,6 +381,9 @@ function ParsePostsDir(dirents, config, arrayPostInfo) {
 		const postinfo = {};
 		postinfo['link'] = `${config['site']['root']}${name}/`;
 
+		if (arrayPostInfo.some(item => item['link'] === postinfo['link']))
+			throw new Error(`Duplicate post file: ${infile}`);
+
 		if (BuildPosts(config, infile, outdir, postinfo))
 			arrayPostInfo.push(postinfo);
 	}
