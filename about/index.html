@@ -9,6 +9,7 @@
    <meta property="og:title" content="About">
    <meta property="og:type" content="article">
    <meta property="og:url" content="https://fdxx.github.io/markhub/about/">
+   <meta property="og:image" content="https://fdxx.github.io/markhub/assets/images/favicon.ico">
    <meta property="og:description" content="About">
 
    <script type="application/ld+json">
@@ -52,12 +53,12 @@
          <section class="markdown-body">
             <p><a href="https://github.com/fdxx/markhub">MarkHub</a>, A simple blog system built with nodejs. <!-- more --> It parses the Markdown file into an HTML file and outputs it to the specified directory. You need to use nginx etc. to present your website.</p>
 <h3><a href="https://fdxx.github.io/markhub">Preview</a></h3>
-<h2>Features</h2>
+<h2 id="features" tabindex="-1">Features <a class="header-anchor" href="#features">#</a></h2>
 <ul>
 <li>Easily write articles using markdown syntax.</li>
 <li>github css theme styles.</li>
 </ul>
-<h2>build</h2>
+<h2 id="build" tabindex="-1">build <a class="header-anchor" href="#build">#</a></h2>
 <pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/fdxx/markhub
 <span class="hljs-built_in">cd</span> markhub
 npm install
@@ -68,7 +69,7 @@ npm install
 <span class="hljs-comment">## build</span>
 node index.js
 </code></pre>
-<h2>Command Parameter</h2>
+<h2 id="command-parameter" tabindex="-1">Command Parameter <a class="header-anchor" href="#command-parameter">#</a></h2>
 <ul>
 <li><strong>config</strong>: Specify config file path. default value <code>./config.yaml</code>. For config instructions, see <code>config.example.yaml</code>.</li>
 <li><strong>noclean</strong>: By default, all files in <code>config.site.push_dir</code> are deleted before building, specify this parameter to prevent deletion of the.</li>
@@ -76,7 +77,7 @@ node index.js
 <p>Example:</p>
 <pre><code class="language-bash">node index.js --config <span class="hljs-string">&quot;path/to/config.yaml&quot;</span> --noclean
 </code></pre>
-<h2>Front-matter</h2>
+<h2 id="front-matter" tabindex="-1">Front-matter <a class="header-anchor" href="#front-matter">#</a></h2>
 <p>At the beginning of the post, surround the yaml block with <code>---</code></p>
 <pre><code class="language-yaml"><span class="hljs-meta">---</span>
 <span class="hljs-comment">## Post Title</span>
@@ -113,7 +114,7 @@ node index.js
 <span class="hljs-attr">draft:</span> <span class="hljs-literal">false</span>
 <span class="hljs-meta">---
 </span></code></pre>
-<h2>Credit</h2>
+<h2 id="credit" tabindex="-1">Credit <a class="header-anchor" href="#credit">#</a></h2>
 <ul>
 <li><a href="https://github.com/markdown-it/markdown-it">markdown-it</a></li>
 <li><a href="https://github.com/mdit-plugins/mdit-plugins">mdit-plugins</a></li>
@@ -121,7 +122,7 @@ node index.js
 <li><a href="https://github.com/sindresorhus/github-markdown-css">github-markdown-css</a></li>
 <li><a href="https://github.com/Remix-Design/RemixIcon">RemixIcon</a></li>
 </ul>
-<h2>Design Reference</h2>
+<h2 id="design-reference" tabindex="-1">Design Reference <a class="header-anchor" href="#design-reference">#</a></h2>
 <ul>
 <li><a href="https://github.com/hexojs/hexo">hexo</a></li>
 <li><a href="https://github.com/next-theme/hexo-theme-next">hexo-theme-next</a></li>
