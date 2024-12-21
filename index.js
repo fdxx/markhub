@@ -11,6 +11,8 @@ import { katex } from "@mdit/plugin-katex";
 import YAML from 'yaml';
 import ejs from 'ejs';
 import ArgsParser from 'minimist';
+import anchor from 'markdown-it-anchor';
+
 
 const __dirname = import.meta.dirname;
 
@@ -96,7 +98,11 @@ const mdrenderer = markdownit({ html: true, highlight: HighlighHandle })
 	.use(alert)
 	.use(tab, { name: "tabs" })
 	.use(imgLazyload)
-	.use(katex);
+	.use(katex)
+	.use(anchor, {
+		level: [1,2],
+		permalink: anchor.permalink.linkInsideHeader()
+	  })
 
 
 function GetValue(value, defValue) {

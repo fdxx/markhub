@@ -11,6 +11,7 @@ body {
   --def-header-bgc: #F5F5F5;
   --def-color-muted: #636c76;
   --def-tabs-bc: #cacaca;
+  --def-tag-bc: #d6d6d6;
   --def-pagination-cur-bgc: #d5d5d5;
   --def-pagination-bc: #eee;
   --def-readmore-bgc: #F5F5F5;
@@ -25,6 +26,7 @@ body {
     --def-header-bgc: #171d25;
     --def-color-muted: #8d96a0;
     --def-tabs-bc: #545454;
+    --def-tag-bc: #545454;
     --def-pagination-cur-bgc: #4b4b4b;
     --def-pagination-bc: #2e2e2e;
     --def-readmore-bgc: #2e2e2e;
@@ -214,15 +216,18 @@ main {
 }
 
 .tags_cloud_tag {
-  padding: 0px 10px;
+  padding: 5px 12px;
+  margin-right: 12px;
   margin-bottom: 20px;
+  border: 1px solid var(--def-tag-bc);
+  border-radius: 10px;
 }
 
 .tags_cloud_tag a {
   font-size: 1em;
   color: var(--def-color);
   transition: color 0.3s;
-  text-underline-offset: 6px;
+  text-decoration: none;
 }
 
 .tags_cloud_tag a:hover {
@@ -238,8 +243,11 @@ main {
 }
 
 .post_tag {
-  padding-right: 10px;
+  padding: 5px 12px;
+  margin-right: 12px;
   margin-bottom: 10px;
+  border: 1px solid var(--def-tag-bc);
+  border-radius: 10px;
 }
 
 .post_tag a {
@@ -344,6 +352,17 @@ footer a:hover {
   text-underline-offset: 3px;
 }
 
+.header-anchor {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+h1:hover .header-anchor,
+h2:hover .header-anchor {
+  visibility: visible;
+  opacity: 1;
+}
 
 @media (max-width: 767px) {
   main {

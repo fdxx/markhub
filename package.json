@@ -20,6 +20,7 @@
     "ejs": "^3.1.10",
     "highlight.js": "^11.10.0",
     "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
     "minimist": "^1.2.8",
     "yaml": "^2.5.0"
   }
