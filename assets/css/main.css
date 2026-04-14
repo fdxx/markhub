@@ -364,6 +364,19 @@ h2:hover .header-anchor {
   opacity: 1;
 }
 
+h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1em;
+  background-color: var(--def-href-color);
+  border-radius: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+
 @media (max-width: 767px) {
   main {
     padding: 0px 20px;
