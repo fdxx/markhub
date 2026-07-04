@@ -111,20 +111,19 @@ function GetValue(value, defValue) {
 	return defValue;
 }
 
-// YYYY-MM-DD
-function FormatDate(str, file = "") {
-	let date;
-
+// 解析日期字段为 Date 对象，保留秒级精度，用于排序
+function ParseDate(str, file = "") {
 	if (str == undefined) {
-		date = fs.statSync(file).mtime;
+		return fs.statSync(file).mtime;
 	}
-	else if (str == "now") {
-		date = new Date();
+	if (str == "now") {
+		return new Date();
 	}
-	else {
-		date = new Date(str);
-	}
+	return new Date(str);
+}
 
+// 格式化 Date 对象为 YYYY-MM-DD，仅用于展示
+function FormatDate(date) {
 	const options = {
 		year: 'numeric',
 		month: '2-digit',
@@ -153,9 +152,15 @@ function BuildPosts(config, infile, outdir, postinfo) {
 	}
 
 	postinfo['description'] = GetValue(frontmatter['description'], postinfo['title']);
-	postinfo['date'] = FormatDate(frontmatter['date'], infile);
-	postinfo['lastmod'] = GetValue(frontmatter['lastmod'], postinfo['date']);
-	postinfo['lastmod'] = FormatDate(postinfo['lastmod'], infile);
+
+	const dateRaw = ParseDate(frontmatter['date'], infile);
+	postinfo['date'] = FormatDate(dateRaw);
+	postinfo['dateRaw'] = dateRaw;
+
+	const lastmodRaw = frontmatter['lastmod'] !== undefined ? ParseDate(frontmatter['lastmod'], infile) : dateRaw;
+	postinfo['lastmod'] = FormatDate(lastmodRaw);
+	postinfo['lastmodRaw'] = lastmodRaw;
+
 	postinfo['author'] = GetValue(frontmatter['author'], config['site']['author']);
 	postinfo['comments'] = GetValue(frontmatter['comments'], true);
 	postinfo['tags'] = GetValue(frontmatter['tags'], []);
@@ -288,6 +293,7 @@ function BuildTagsCloud(config, arrayPostInfo) {
 				tagscloud['none'] = [];
 			postinfo['title'] = value['title'];
 			postinfo['date'] = value['date'];
+			postinfo['dateRaw'] = value['dateRaw'];
 			postinfo['link'] = value['link'];
 			tagscloud['none'].push(postinfo);
 			continue;
@@ -298,13 +304,14 @@ function BuildTagsCloud(config, arrayPostInfo) {
 				tagscloud[tag] = [];
 			postinfo['title'] = value['title'];
 			postinfo['date'] = value['date'];
+			postinfo['dateRaw'] = value['dateRaw'];
 			postinfo['link'] = value['link'];
 			tagscloud[tag].push(postinfo);
 		}
 	}
 
 	for (const tag in tagscloud) {
-		tagscloud[tag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+		tagscloud[tag].sort((a, b) => b.dateRaw.getTime() - a.dateRaw.getTime());
 
 		const typedata = {
 			pageSize: config['site']['pageSize']['archive'],
@@ -340,13 +347,15 @@ function BuildSiteMap(config, arrayPostInfo) {
 		const postinfo = {};
 		postinfo['loc'] = `${siteurl}${value['link']}`;
 		postinfo['lastmod'] = value['lastmod'];
+		postinfo['lastmodRaw'] = value['lastmodRaw'];
 		sitemap.push(postinfo);
 	}
 
-	sitemap.push({ loc: `${siteurl}${config['site']['root']}`, lastmod: FormatDate("now") });
+	const now = new Date();
+	sitemap.push({ loc: `${siteurl}${config['site']['root']}`, lastmod: FormatDate(now), lastmodRaw: now });
 
 	sitemap.sort((a, b) => {
-		return new Date(b.lastmod).getTime() - new Date(a.lastmod).getTime();
+		return b.lastmodRaw.getTime() - a.lastmodRaw.getTime();
 	});
 
 	const outfile = Path.join(config['site']['push_dir'], "sitemap.xml");
@@ -409,7 +418,7 @@ function main() {
 	ParsePostsDir(dirents, config, arrayPostInfo);
 
 	arrayPostInfo.sort((a, b) => {
-		return new Date(b.date).getTime() - new Date(a.date).getTime();
+		return b.dateRaw.getTime() - a.dateRaw.getTime();
 	});
 
 	let typedata = {
