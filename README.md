@@ -76,6 +76,7 @@ draft: false
 - [highlightjs](https://github.com/highlightjs/highlight.js)
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 - [RemixIcon](https://github.com/Remix-Design/RemixIcon)
+- [mdit-explorer](https://github.com/fdxx/mdit-explorer)
 
 ## Design Reference
 - [hexo](https://github.com/hexojs/hexo)
