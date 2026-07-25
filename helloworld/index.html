@@ -22,6 +22,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
    <link rel="stylesheet" href="/markhub/assets/css/highlight-github.css">
    <link rel="stylesheet" href="/markhub/assets/css/main.css">
+   <link rel="stylesheet" href="/markhub/assets/css/mdit-explorer.css">
 </head>
 <body>
    <header class="header">
@@ -84,6 +85,927 @@ Link to the <a href="https://github.com">github.</a></p>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-0" checked="checked" disabled="disabled"><label class="task-list-item-label" for="task-item-0"> https://github.com/microsoft/vscode/issues/224902</label></li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-1" disabled="disabled"><label class="task-list-item-label" for="task-item-1"> Add delight to the experience when all tasks are complete</label></li>
 </ul>
+<h2 id="explorer" tabindex="-1">Explorer <a class="header-anchor" href="#explorer">#</a></h2>
+<div class="mexp" data-mdit-explorer><aside class="mexp__sidebar"><div class="mexp__side-title">Explorer</div><nav class="mexp__tree" aria-label="File explorer"><ul class="mexp__group" role="group"><li class="mexp__item"><div class="mexp__folder"><span class="mexp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.5A1.5 1.5 0 0 1 4.5 4H9l2 2h8.5A1.5 1.5 0 0 1 21 7.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-12Z"/></svg></span><span class="mexp__name">include</span></div><ul class="mexp__group" role="group"><li class="mexp__item"><button class="mexp__file" type="button" role="treeitem" aria-selected="true" data-path="include/ArgsParser.hpp" data-name="ArgsParser.hpp" data-ext="hpp" title="include/ArgsParser.hpp"><span class="mexp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 2.2V8h3.8L14 4.2ZM8 4v16h9V10h-5V4H8Z"/></svg></span><span class="mexp__name">ArgsParser.hpp</span></button></li><li class="mexp__item"><button class="mexp__file" type="button" role="treeitem" aria-selected="false" data-path="include/JustifiedLayout.hpp" data-name="JustifiedLayout.hpp" data-ext="hpp" title="include/JustifiedLayout.hpp"><span class="mexp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 2.2V8h3.8L14 4.2ZM8 4v16h9V10h-5V4H8Z"/></svg></span><span class="mexp__name">JustifiedLayout.hpp</span></button></li></ul></li><li class="mexp__item"><div class="mexp__folder"><span class="mexp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.5A1.5 1.5 0 0 1 4.5 4H9l2 2h8.5A1.5 1.5 0 0 1 21 7.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-12Z"/></svg></span><span class="mexp__name">src</span></div><ul class="mexp__group" role="group"><li class="mexp__item"><button class="mexp__file" type="button" role="treeitem" aria-selected="false" data-path="src/gallery.cpp" data-name="gallery.cpp" data-ext="cpp" title="src/gallery.cpp"><span class="mexp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm8 2.2V8h3.8L14 4.2ZM8 4v16h9V10h-5V4H8Z"/></svg></span><span class="mexp__name">gallery.cpp</span></button></li></ul></li></ul></nav></aside><section class="mexp__main"><div class="mexp__tabbar"><div class="mexp__tab"><span class="mexp__tab-name">ArgsParser.hpp</span></div></div><div class="mexp__crumbbar"><span class="mexp__crumb">include/ArgsParser.hpp</span><div class="mexp__actions"><button class="mexp__copy" type="button" data-path="include/ArgsParser.hpp" aria-label="Copy code"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 8h11v13H9V8Zm2 2v9h7v-9h-7ZM4 3h11v3h-2V5H6v9h1v2H4V3Z"/></svg></button></div></div><div class="mexp__views"><pre class="mexp__view" data-path="include/ArgsParser.hpp"><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdint&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;type_traits&gt;</span></span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsParser</span>
+{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">ArgsParser</span>(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])
+    {
+        m_CmdName = argv[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; ++i)
+            <span class="hljs-built_in">Parse</span>(argv[i]);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Has</span><span class="hljs-params">(std::string_view key)</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> m_Args.<span class="hljs-built_in">contains</span>(std::<span class="hljs-built_in">string</span>(key));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+    T <span class="hljs-title">Get</span><span class="hljs-params">(std::string_view key, T defValue = {})</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">auto</span> it = m_Args.<span class="hljs-built_in">find</span>(std::<span class="hljs-built_in">string</span>(key));
+        <span class="hljs-keyword">if</span> (it == m_Args.<span class="hljs-built_in">end</span>())
+            <span class="hljs-keyword">return</span> defValue;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Convert</span>&lt;T&gt;(it-&gt;second);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-title">GetCmdName</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> m_CmdName.<span class="hljs-built_in">c_str</span>();
+    }
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Parse</span><span class="hljs-params">(std::string_view arg)</span>
+    </span>{
+        <span class="hljs-keyword">auto</span> pos = arg.<span class="hljs-built_in">find</span>(<span class="hljs-string">&#x27;=&#x27;</span>);
+        <span class="hljs-keyword">if</span> (pos == std::string_view::npos)
+        {
+            m_Args[std::<span class="hljs-built_in">string</span>(arg)] = <span class="hljs-string">&quot;true&quot;</span>;
+            <span class="hljs-keyword">return</span>;
+        }
+
+        m_Args[std::<span class="hljs-built_in">string</span>(arg.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, pos))] = std::<span class="hljs-built_in">string</span>(arg.<span class="hljs-built_in">substr</span>(pos + <span class="hljs-number">1</span>));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+    T <span class="hljs-title">Convert</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; str)</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-function"><span class="hljs-keyword">if</span> <span class="hljs-title">constexpr</span> <span class="hljs-params">(std::is_same_v&lt;T, std::string&gt;)</span>
+            <span class="hljs-keyword">return</span> str</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">constexpr</span> (std::is_same_v&lt;T, <span class="hljs-type">int32_t</span>&gt;)
+            <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">stoi</span>(str);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">constexpr</span> (std::is_same_v&lt;T, <span class="hljs-type">int64_t</span>&gt;)
+            <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">stoll</span>(str);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">constexpr</span> (std::is_same_v&lt;T, <span class="hljs-type">double</span>&gt;)
+            <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">stod</span>(str);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">constexpr</span> (std::is_same_v&lt;T, <span class="hljs-type">bool</span>&gt;)
+            <span class="hljs-keyword">return</span> str == <span class="hljs-string">&quot;1&quot;</span> || str == <span class="hljs-string">&quot;true&quot;</span> || str == <span class="hljs-string">&quot;yes&quot;</span> || str == <span class="hljs-string">&quot;on&quot;</span>;
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">static_assert</span>(!<span class="hljs-built_in">sizeof</span>(T), <span class="hljs-string">&quot;Unsupported type&quot;</span>);
+        }
+    }
+
+    std::string m_CmdName;
+    std::unordered_map&lt;std::string, std::string&gt; m_Args;
+};
+</code></pre><pre class="mexp__view" data-path="include/JustifiedLayout.hpp" hidden><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;variant&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;optional&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;limits&gt;</span></span>
+
+<span class="hljs-keyword">namespace</span> JustifiedLayout {
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Config</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Padding</span> {
+    <span class="hljs-type">double</span> top    = <span class="hljs-number">10</span>;
+    <span class="hljs-type">double</span> right  = <span class="hljs-number">10</span>;
+    <span class="hljs-type">double</span> bottom = <span class="hljs-number">10</span>;
+    <span class="hljs-type">double</span> left   = <span class="hljs-number">10</span>;
+};
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Spacing</span> {
+    <span class="hljs-type">double</span> horizontal = <span class="hljs-number">10</span>;
+    <span class="hljs-type">double</span> vertical   = <span class="hljs-number">10</span>;
+};
+
+<span class="hljs-keyword">enum class</span> <span class="hljs-title class_">WidowLayoutStyle</span> { Left, Center, Justify };
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">LayoutConfig</span> {
+    <span class="hljs-type">double</span>            containerWidth             = <span class="hljs-number">1060</span>;
+    Padding           containerPadding           = {};
+    Spacing           boxSpacing                 = {};
+    <span class="hljs-type">double</span>            targetRowHeight            = <span class="hljs-number">320</span>;
+    <span class="hljs-type">double</span>            targetRowHeightTolerance   = <span class="hljs-number">0.25</span>;
+    std::<span class="hljs-type">size_t</span>       maxNumRows                 = std::numeric_limits&lt;std::<span class="hljs-type">size_t</span>&gt;::<span class="hljs-built_in">max</span>();
+    std::optional&lt;<span class="hljs-type">double</span>&gt; forceAspectRatio       = std::<span class="hljs-literal">nullopt</span>;
+    <span class="hljs-type">bool</span>              showWidows                 = <span class="hljs-literal">true</span>;
+    std::optional&lt;std::<span class="hljs-type">size_t</span>&gt; fullWidthBreakoutRowCadence = std::<span class="hljs-literal">nullopt</span>;
+    WidowLayoutStyle  widowLayoutStyle           = WidowLayoutStyle::Left;
+};
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Input</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">ItemSize</span> {
+    <span class="hljs-type">double</span> width;
+    <span class="hljs-type">double</span> height;
+};
+
+<span class="hljs-keyword">using</span> InputItem = std::variant&lt;ItemSize, <span class="hljs-type">double</span>&gt;;
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Box</span> {
+    <span class="hljs-type">double</span> top    = <span class="hljs-number">0</span>;
+    <span class="hljs-type">double</span> left   = <span class="hljs-number">0</span>;
+    <span class="hljs-type">double</span> width  = <span class="hljs-number">0</span>;
+    <span class="hljs-type">double</span> height = <span class="hljs-number">0</span>;
+
+    <span class="hljs-type">double</span> aspectRatio       = <span class="hljs-number">1</span>;
+    <span class="hljs-type">bool</span>   forcedAspectRatio = <span class="hljs-literal">false</span>;
+};
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">LayoutResult</span> {
+    <span class="hljs-type">double</span>            containerHeight = <span class="hljs-number">0</span>;
+    std::<span class="hljs-type">size_t</span>       widowCount      = <span class="hljs-number">0</span>;
+    std::vector&lt;Box&gt;  boxes;
+};
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Internal: Row</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Row</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Params</span> {
+        <span class="hljs-type">double</span>           top;
+        <span class="hljs-type">double</span>           left;
+        <span class="hljs-type">double</span>           width;
+        <span class="hljs-type">double</span>           spacing;
+        <span class="hljs-type">double</span>           targetRowHeight;
+        <span class="hljs-type">double</span>           targetRowHeightTolerance;
+        <span class="hljs-type">double</span>           edgeCaseMinRowHeight;
+        <span class="hljs-type">double</span>           edgeCaseMaxRowHeight;
+        <span class="hljs-type">bool</span>             isBreakoutRow;
+        WidowLayoutStyle widowLayoutStyle;
+    };
+
+    <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">Row</span><span class="hljs-params">(<span class="hljs-type">const</span> Params&amp; p)</span>
+        : top_(p.top)
+        , left_(p.left)
+        , width_(p.width)
+        , spacing_(p.spacing)
+        , targetRowHeight_(p.targetRowHeight)
+        , minAspectRatio_(p.width / p.targetRowHeight * (<span class="hljs-number">1.0</span> - p.targetRowHeightTolerance))
+        , maxAspectRatio_(p.width / p.targetRowHeight * (<span class="hljs-number">1.0</span> + p.targetRowHeightTolerance))
+        , edgeCaseMinRowHeight_(p.edgeCaseMinRowHeight)
+        , edgeCaseMaxRowHeight_(p.edgeCaseMaxRowHeight)
+        , widowLayoutStyle_(p.widowLayoutStyle)
+        , isBreakoutRow_(p.isBreakoutRow)
+        , height_(<span class="hljs-number">0</span>)
+        // ❶ 预分配：典型行不超过 <span class="hljs-number">16</span> 张图
+        , aspectRatioSum_(<span class="hljs-number">0.0</span>)
+    {</span>
+        items_.<span class="hljs-built_in">reserve</span>(<span class="hljs-number">16</span>);
+    }
+
+    <span class="hljs-comment">// 返回 true 表示 item 已入行，false 表示被拒绝（调用方重试新行）</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">addItem</span><span class="hljs-params">(Box item)</span> </span>{
+        <span class="hljs-type">const</span> <span class="hljs-type">double</span> newSum   = aspectRatioSum_ + item.aspectRatio;
+        <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> newCount = items_.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>;
+        <span class="hljs-type">const</span> <span class="hljs-type">double</span> newRowWidthWithoutSpacing =
+            width_ - <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(newCount - <span class="hljs-number">1</span>) * spacing_;
+        <span class="hljs-type">const</span> <span class="hljs-type">double</span> targetAspectRatio = newRowWidthWithoutSpacing / targetRowHeight_;
+
+        <span class="hljs-comment">// ── Breakout 行：单张横向/方形图铺满整行 ──</span>
+        <span class="hljs-keyword">if</span> (isBreakoutRow_ &amp;&amp; items_.<span class="hljs-built_in">empty</span>() &amp;&amp; item.aspectRatio &gt;= <span class="hljs-number">1.0</span>) {
+            items_.<span class="hljs-built_in">push_back</span>(item);
+            aspectRatioSum_ = item.aspectRatio;
+            <span class="hljs-built_in">completeLayout</span>(newRowWidthWithoutSpacing / item.aspectRatio,
+                           WidowLayoutStyle::Justify);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (newSum &lt; minAspectRatio_) {
+            <span class="hljs-comment">// 行高仍然过高，继续收集</span>
+            items_.<span class="hljs-built_in">push_back</span>(item);
+            aspectRatioSum_ = newSum;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (newSum &gt; maxAspectRatio_) {
+            <span class="hljs-comment">// 行高会过矮</span>
+            <span class="hljs-keyword">if</span> (items_.<span class="hljs-built_in">empty</span>()) {
+                <span class="hljs-comment">// 超宽单图：强制接受</span>
+                items_.<span class="hljs-built_in">push_back</span>(item);
+                aspectRatioSum_ = newSum;
+                <span class="hljs-built_in">completeLayout</span>(newRowWidthWithoutSpacing / newSum,
+                               WidowLayoutStyle::Justify);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+
+            <span class="hljs-comment">// ❷ 使用预维护的 aspectRatioSum_ 避免重复 accumulate</span>
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> prevRowWidthWithoutSpacing =
+                width_ - <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(items_.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>) * spacing_;
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> prevTargetAspectRatio = prevRowWidthWithoutSpacing / targetRowHeight_;
+
+            <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">abs</span>(newSum  - targetAspectRatio) &gt;
+                std::<span class="hljs-built_in">abs</span>(aspectRatioSum_ - prevTargetAspectRatio)) {
+                <span class="hljs-comment">// 旧行更接近目标，拒绝新 item</span>
+                <span class="hljs-built_in">completeLayout</span>(prevRowWidthWithoutSpacing / aspectRatioSum_,
+                               WidowLayoutStyle::Justify);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// 新行更接近目标，接受</span>
+                items_.<span class="hljs-built_in">push_back</span>(item);
+                aspectRatioSum_ = newSum;
+                <span class="hljs-built_in">completeLayout</span>(newRowWidthWithoutSpacing / newSum,
+                               WidowLayoutStyle::Justify);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+        }
+
+        <span class="hljs-comment">// 在容差范围内，接受并关闭行</span>
+        items_.<span class="hljs-built_in">push_back</span>(item);
+        aspectRatioSum_ = newSum;
+        <span class="hljs-built_in">completeLayout</span>(newRowWidthWithoutSpacing / newSum,
+                       WidowLayoutStyle::Justify);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    [[nodiscard]] <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isLayoutComplete</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> height_ &gt; <span class="hljs-number">0</span>; }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">forceComplete</span><span class="hljs-params">(<span class="hljs-type">bool</span> <span class="hljs-comment">/*fitToWidth*/</span> = <span class="hljs-literal">false</span>,
+                       std::optional&lt;<span class="hljs-type">double</span>&gt; rowHeight = std::<span class="hljs-literal">nullopt</span>)</span> </span>{
+        <span class="hljs-built_in">completeLayout</span>(rowHeight.<span class="hljs-built_in">value_or</span>(targetRowHeight_), widowLayoutStyle_);
+    }
+
+    [[nodiscard]] <span class="hljs-function"><span class="hljs-type">const</span> std::vector&lt;Box&gt;&amp; <span class="hljs-title">getItems</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> items_; }
+    [[nodiscard]] <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">height</span><span class="hljs-params">()</span>          <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> height_; }
+    [[nodiscard]] <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">targetRowHeight</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> targetRowHeight_; }
+    [[nodiscard]] <span class="hljs-function"><span class="hljs-type">bool</span>   <span class="hljs-title">isBreakoutRow</span><span class="hljs-params">()</span>   <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> isBreakoutRow_; }
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">completeLayout</span><span class="hljs-params">(<span class="hljs-type">double</span> newHeight, WidowLayoutStyle style)</span> </span>{
+        <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> n = items_.<span class="hljs-built_in">size</span>();
+
+        <span class="hljs-comment">// 限幅到边缘高度范围</span>
+        <span class="hljs-type">const</span> <span class="hljs-type">double</span> clampedHeight =
+            std::<span class="hljs-built_in">clamp</span>(newHeight, edgeCaseMinRowHeight_, edgeCaseMaxRowHeight_);
+
+        <span class="hljs-type">double</span> widthScale;
+        <span class="hljs-keyword">if</span> (newHeight != clampedHeight) {
+            height_ = clampedHeight;
+            <span class="hljs-comment">// ❸ 合并两次除法为一次乘法</span>
+            widthScale = newHeight / clampedHeight;
+        } <span class="hljs-keyword">else</span> {
+            height_ = newHeight;
+            widthScale = <span class="hljs-number">1.0</span>;
+        }
+
+        <span class="hljs-comment">// 第一遍：按比例分配宽度并从左排列</span>
+        <span class="hljs-type">double</span> cursor = left_;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; item : items_) {
+            item.top    = top_;
+            item.height = height_;
+            item.width  = item.aspectRatio * height_ * widthScale;
+            item.left   = cursor;
+            cursor += item.width + spacing_;
+        }
+
+        <span class="hljs-keyword">if</span> (style == WidowLayoutStyle::Justify) {
+            <span class="hljs-comment">// ❹ 消除重复的 itemWidthSum 累加，直接复用 cursor</span>
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> totalUsed   = cursor - spacing_ - left_;
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> errorPerItem = (totalUsed - width_) / <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(n);
+
+            <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) {
+                items_[<span class="hljs-number">0</span>].width -= std::<span class="hljs-built_in">round</span>(errorPerItem);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// ❺ 将 (i+1)*errorPerItem 转为增量更新，只调用一次 std::round</span>
+                <span class="hljs-type">double</span> prevCumError = <span class="hljs-number">0.0</span>;
+                <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+                    <span class="hljs-type">const</span> <span class="hljs-type">double</span> cumError = std::<span class="hljs-built_in">round</span>(<span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">double</span>&gt;(i + <span class="hljs-number">1</span>) * errorPerItem);
+                    <span class="hljs-type">const</span> <span class="hljs-type">double</span> delta    = cumError - prevCumError;
+                    items_[i].left  -= prevCumError;
+                    items_[i].width -= delta;
+                    prevCumError     = cumError;
+                }
+            }
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (style == WidowLayoutStyle::Center) {
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> totalUsed  = cursor - spacing_ - left_;
+            <span class="hljs-type">const</span> <span class="hljs-type">double</span> centerOffset = (width_ - totalUsed) / <span class="hljs-number">2.0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; item : items_) {
+                item.left += centerOffset + spacing_;
+            }
+        }
+        <span class="hljs-comment">// WidowLayoutStyle::Left：无需额外处理</span>
+    }
+
+    <span class="hljs-type">double</span>           top_;
+    <span class="hljs-type">double</span>           left_;
+    <span class="hljs-type">double</span>           width_;
+    <span class="hljs-type">double</span>           spacing_;
+    <span class="hljs-type">double</span>           targetRowHeight_;
+    <span class="hljs-type">double</span>           minAspectRatio_;
+    <span class="hljs-type">double</span>           maxAspectRatio_;
+    <span class="hljs-type">double</span>           edgeCaseMinRowHeight_;
+    <span class="hljs-type">double</span>           edgeCaseMaxRowHeight_;
+    WidowLayoutStyle widowLayoutStyle_;
+    <span class="hljs-type">bool</span>             isBreakoutRow_;
+    <span class="hljs-type">double</span>           height_;
+    std::vector&lt;Box&gt; items_;
+    <span class="hljs-type">double</span>           aspectRatioSum_;   <span class="hljs-comment">// ❷ 增量维护，避免 O(n) accumulate</span>
+};
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Internal: layout state</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">LayoutData</span> {
+    std::vector&lt;Box&gt;  layoutItems;
+    <span class="hljs-type">double</span>            containerHeight = <span class="hljs-number">0</span>;
+    std::vector&lt;Row&gt;  rows;
+};
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Internal helpers</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> Row <span class="hljs-title">createNewRow</span><span class="hljs-params">(<span class="hljs-type">const</span> LayoutConfig&amp; cfg, <span class="hljs-type">const</span> LayoutData&amp; data)</span> </span>{
+    <span class="hljs-type">const</span> <span class="hljs-type">bool</span> isBreakout = [&amp;]() -&gt; <span class="hljs-type">bool</span> {
+        <span class="hljs-keyword">if</span> (!cfg.fullWidthBreakoutRowCadence.<span class="hljs-built_in">has_value</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> cadence = *cfg.fullWidthBreakoutRowCadence;
+        <span class="hljs-keyword">return</span> cadence &gt; <span class="hljs-number">0</span> &amp;&amp; ((data.rows.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>) % cadence) == <span class="hljs-number">0</span>;
+    }();
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Row</span>({
+        .top                      = data.containerHeight,
+        .left                     = cfg.containerPadding.left,
+        .width                    = cfg.containerWidth
+                                    - cfg.containerPadding.left
+                                    - cfg.containerPadding.right,
+        .spacing                  = cfg.boxSpacing.horizontal,
+        .targetRowHeight          = cfg.targetRowHeight,
+        .targetRowHeightTolerance = cfg.targetRowHeightTolerance,
+        .edgeCaseMinRowHeight     = <span class="hljs-number">0.5</span> * cfg.targetRowHeight,
+        .edgeCaseMaxRowHeight     = <span class="hljs-number">2.0</span> * cfg.targetRowHeight,
+        .isBreakoutRow            = isBreakout,
+        .widowLayoutStyle         = cfg.widowLayoutStyle,
+    });
+}
+
+<span class="hljs-comment">// ❻ 接受右值引用，避免额外拷贝；直接用 append_range / insert 批量追加</span>
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">addRow</span><span class="hljs-params">(<span class="hljs-type">const</span> LayoutConfig&amp; cfg, LayoutData&amp; data, Row&amp; row)</span> </span>{
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; items = row.<span class="hljs-built_in">getItems</span>();
+    data.layoutItems.<span class="hljs-built_in">insert</span>(data.layoutItems.<span class="hljs-built_in">end</span>(), items.<span class="hljs-built_in">begin</span>(), items.<span class="hljs-built_in">end</span>());
+    data.rows.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(row));
+    data.containerHeight += data.rows.<span class="hljs-built_in">back</span>().<span class="hljs-built_in">height</span>() + cfg.boxSpacing.vertical;
+}
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// computeLayout</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> LayoutResult <span class="hljs-title">computeLayout</span><span class="hljs-params">(<span class="hljs-type">const</span> LayoutConfig&amp;    cfg,
+                                  LayoutData&amp;            data,
+                                  <span class="hljs-type">const</span> std::vector&lt;Box&gt;&amp; itemLayoutData)</span> </span>{
+    std::<span class="hljs-type">size_t</span> widowCount = <span class="hljs-number">0</span>;
+    <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> total = itemLayoutData.<span class="hljs-built_in">size</span>();
+
+    <span class="hljs-comment">// ❼ 用 std::optional&lt;Row&gt; + in-place reset 替代反复构造，减少堆分配</span>
+    <span class="hljs-comment">//    同时，两处&quot;新行立即 addItem 可能立即 complete&quot;的逻辑合并为循环</span>
+    std::optional&lt;Row&gt; currentRow;
+    <span class="hljs-type">bool</span> done = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-keyword">auto</span> ensureRow = [&amp;]() {
+        <span class="hljs-keyword">if</span> (!currentRow.<span class="hljs-built_in">has_value</span>())
+            currentRow.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">createNewRow</span>(cfg, data));
+    };
+
+    <span class="hljs-keyword">auto</span> flushRow = [&amp;]() -&gt; <span class="hljs-type">bool</span> {
+        <span class="hljs-built_in">addRow</span>(cfg, data, *currentRow);
+        currentRow.<span class="hljs-built_in">reset</span>();
+        <span class="hljs-keyword">if</span> (data.rows.<span class="hljs-built_in">size</span>() &gt;= cfg.maxNumRows) {
+            done = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    };
+
+    <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; total &amp;&amp; !done; ++i) {
+        <span class="hljs-type">const</span> Box&amp; itemData = itemLayoutData[i];
+
+        <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">isnan</span>(itemData.aspectRatio)) [[unlikely]] {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(
+                <span class="hljs-string">&quot;Item &quot;</span> + std::<span class="hljs-built_in">to_string</span>(i) + <span class="hljs-string">&quot; has an invalid aspect ratio&quot;</span>);
+        }
+
+        <span class="hljs-built_in">ensureRow</span>();
+
+        <span class="hljs-type">bool</span> itemAdded = currentRow-&gt;<span class="hljs-built_in">addItem</span>(itemData);
+
+        <span class="hljs-keyword">if</span> (currentRow-&gt;<span class="hljs-built_in">isLayoutComplete</span>()) {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">flushRow</span>()) <span class="hljs-keyword">break</span>;
+            <span class="hljs-built_in">ensureRow</span>();
+
+            <span class="hljs-keyword">if</span> (!itemAdded) {
+                itemAdded = currentRow-&gt;<span class="hljs-built_in">addItem</span>(itemData);
+                <span class="hljs-keyword">if</span> (currentRow-&gt;<span class="hljs-built_in">isLayoutComplete</span>()) {
+                    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">flushRow</span>()) <span class="hljs-keyword">break</span>;
+                    <span class="hljs-built_in">ensureRow</span>();
+                }
+            }
+        }
+    }
+
+    <span class="hljs-comment">// 处理孤行 (widows)</span>
+    <span class="hljs-keyword">if</span> (!done &amp;&amp; currentRow.<span class="hljs-built_in">has_value</span>() &amp;&amp; !currentRow-&gt;<span class="hljs-built_in">getItems</span>().<span class="hljs-built_in">empty</span>()
+        &amp;&amp; cfg.showWidows) {
+
+        std::optional&lt;<span class="hljs-type">double</span>&gt; refHeight;
+        <span class="hljs-keyword">if</span> (!data.rows.<span class="hljs-built_in">empty</span>()) {
+            <span class="hljs-type">const</span> Row&amp; prevRow = data.rows.<span class="hljs-built_in">back</span>();
+            refHeight = prevRow.<span class="hljs-built_in">isBreakoutRow</span>()
+                ? prevRow.<span class="hljs-built_in">targetRowHeight</span>()
+                : prevRow.<span class="hljs-built_in">height</span>();
+        }
+        currentRow-&gt;forceComplete(<span class="hljs-literal">false</span>, refHeight);
+        widowCount = currentRow-&gt;<span class="hljs-built_in">getItems</span>().<span class="hljs-built_in">size</span>();
+        <span class="hljs-built_in">addRow</span>(cfg, data, *currentRow);
+        currentRow.<span class="hljs-built_in">reset</span>();
+    }
+
+    data.containerHeight -= cfg.boxSpacing.vertical;
+    data.containerHeight += cfg.containerPadding.bottom;
+
+    <span class="hljs-keyword">return</span> LayoutResult{
+        .containerHeight = data.containerHeight,
+        .widowCount      = widowCount,
+        .boxes           = std::<span class="hljs-built_in">move</span>(data.layoutItems),   <span class="hljs-comment">// ❽ move 而非拷贝</span>
+    };
+}
+
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+<span class="hljs-comment">// Public entry point</span>
+<span class="hljs-comment">// ─────────────────────────────────────────────</span>
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> LayoutResult <span class="hljs-title">compute</span><span class="hljs-params">(<span class="hljs-type">const</span> std::vector&lt;InputItem&gt;&amp; input,
+                            LayoutConfig config = {})</span> </span>{
+    LayoutData data;
+    data.containerHeight = config.containerPadding.top;
+
+    <span class="hljs-comment">// ❾ 预分配输出容器和行列表</span>
+    <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> n = input.<span class="hljs-built_in">size</span>();
+    data.layoutItems.<span class="hljs-built_in">reserve</span>(n);
+
+    <span class="hljs-comment">// 粗估行数（实际行数 ≤ 图片数，一般远小于）</span>
+    <span class="hljs-type">const</span> <span class="hljs-type">double</span> approxItemsPerRow =
+        (config.containerWidth - config.containerPadding.left - config.containerPadding.right)
+        / config.targetRowHeight;
+    <span class="hljs-keyword">if</span> (approxItemsPerRow &gt; <span class="hljs-number">0</span>)
+        data.rows.<span class="hljs-built_in">reserve</span>(<span class="hljs-built_in">static_cast</span>&lt;std::<span class="hljs-type">size_t</span>&gt;(n / approxItemsPerRow) + <span class="hljs-number">2</span>);
+
+    std::vector&lt;Box&gt; items;
+    items.<span class="hljs-built_in">reserve</span>(n);
+
+    <span class="hljs-type">const</span> <span class="hljs-type">bool</span> forceAR = config.forceAspectRatio.<span class="hljs-built_in">has_value</span>();
+    <span class="hljs-type">const</span> <span class="hljs-type">double</span> forcedAR = forceAR ? *config.forceAspectRatio : <span class="hljs-number">0.0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; in : input) {
+        Box box;
+        <span class="hljs-keyword">if</span> (forceAR) {
+            box.aspectRatio       = forcedAR;
+            box.forcedAspectRatio = <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (std::<span class="hljs-built_in">holds_alternative</span>&lt;ItemSize&gt;(in)) {
+            <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; sz = std::<span class="hljs-built_in">get</span>&lt;ItemSize&gt;(in);
+            box.aspectRatio = sz.width / sz.height;
+        } <span class="hljs-keyword">else</span> {
+            box.aspectRatio = std::<span class="hljs-built_in">get</span>&lt;<span class="hljs-type">double</span>&gt;(in);
+        }
+        items.<span class="hljs-built_in">push_back</span>(box);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">computeLayout</span>(config, data, items);
+}
+
+} <span class="hljs-comment">// namespace JustifiedLayout</span>
+</code></pre><pre class="mexp__view" data-path="src/gallery.cpp" hidden><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ImgSize.hpp&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;inja.hpp&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;JustifiedLayout.hpp&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ArgsParser.hpp&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;print&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_set&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;chrono&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;thread&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span>
+
+<span class="hljs-keyword">namespace</span> fs = std::filesystem;
+<span class="hljs-keyword">namespace</span> jl = JustifiedLayout;
+<span class="hljs-keyword">using</span> json = nlohmann::json;
+
+<span class="hljs-type">static</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">double</span> MAXWIDTH  = <span class="hljs-number">1800.0</span>;
+<span class="hljs-type">static</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">double</span> MAXHEIGHT = <span class="hljs-number">500.0</span>;
+<span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">char</span> *ASSETSDIR = <span class="hljs-string">&quot;assets&quot;</span>;
+<span class="hljs-type">static</span> <span class="hljs-type">const</span> std::unordered_set&lt;std::string&gt; IMAGE_EXTS = {
+    <span class="hljs-string">&quot;.jpg&quot;</span>, <span class="hljs-string">&quot;.jpeg&quot;</span>, <span class="hljs-string">&quot;.png&quot;</span>, <span class="hljs-string">&quot;.gif&quot;</span>, <span class="hljs-string">&quot;.webp&quot;</span>, <span class="hljs-string">&quot;.bmp&quot;</span>, <span class="hljs-string">&quot;.tiff&quot;</span>, <span class="hljs-string">&quot;.tif&quot;</span>
+};
+
+<span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span>... Args&gt;
+<span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">Print</span><span class="hljs-params">(std::FILE *f, std::string_view fmt, Args&amp;&amp;... args)</span>
+</span>{
+    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std::chrono;
+    zoned_time zt{<span class="hljs-built_in">current_zone</span>(), <span class="hljs-built_in">floor</span>&lt;seconds&gt;(system_clock::<span class="hljs-built_in">now</span>())};
+    std::string msg = std::<span class="hljs-built_in">vformat</span>(fmt, std::<span class="hljs-built_in">make_format_args</span>(args...));
+    std::<span class="hljs-built_in">print</span>(f, <span class="hljs-string">&quot;{:%F %T} {}\n&quot;</span>, zt, msg);
+    std::<span class="hljs-built_in">fflush</span>(f);
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FileCounter</span>
+{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">FileCounter</span>(<span class="hljs-type">const</span> fs::path &amp;p)
+    {
+        m_Dir = p;
+        m_lastCount = <span class="hljs-number">0</span>;
+        <span class="hljs-function">std::ifstream <span class="hljs-title">file</span><span class="hljs-params">(SAVE_FILE)</span></span>;
+        <span class="hljs-keyword">if</span> (file)
+            file &gt;&gt; m_lastCount;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">IsChanged</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-type">size_t</span> curCount = <span class="hljs-built_in">CalcuFiles</span>(m_Dir);
+        <span class="hljs-keyword">if</span> (curCount != m_lastCount)
+        {
+            m_lastCount = curCount;
+            <span class="hljs-comment">//持久化</span>
+            std::<span class="hljs-built_in">ofstream</span>(SAVE_FILE, std::ios::trunc) &lt;&lt; m_lastCount;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">size_t</span> <span class="hljs-title">GetLastCount</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> m_lastCount;
+    }
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-function"><span class="hljs-type">size_t</span> <span class="hljs-title">CalcuFiles</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; p)</span>
+    </span>{
+        DIR *dir = ::<span class="hljs-built_in">opendir</span>(p.<span class="hljs-built_in">c_str</span>());
+        <span class="hljs-keyword">if</span> (!dir)
+        {
+            <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Error: opendir failed: {}.&quot;</span>, p.<span class="hljs-built_in">c_str</span>());
+            std::<span class="hljs-built_in">abort</span>();
+        }
+
+        <span class="hljs-type">size_t</span> count = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">struct</span> <span class="hljs-title class_">dirent</span> *entry;
+        <span class="hljs-keyword">while</span> ((entry = ::<span class="hljs-built_in">readdir</span>(dir)))
+        {
+            <span class="hljs-keyword">if</span> (entry-&gt;d_name[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;.&#x27;</span>)
+                <span class="hljs-keyword">continue</span>;
+            count++;
+            <span class="hljs-keyword">if</span> (entry-&gt;d_type == DT_DIR)
+                count += <span class="hljs-built_in">CalcuFiles</span>(p / entry-&gt;d_name);
+        }
+        ::<span class="hljs-built_in">closedir</span>(dir);
+        <span class="hljs-keyword">return</span> count;
+    }
+
+    <span class="hljs-type">size_t</span> m_lastCount;
+    fs::path m_Dir;
+    <span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">const</span> fs::path SAVE_FILE = <span class="hljs-string">&quot;.filecount&quot;</span>;
+};
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">GalleryGenerator</span>
+{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ImageInfo</span>
+    {
+        <span class="hljs-built_in">ImageInfo</span>(<span class="hljs-type">const</span> fs::path &amp;p, fs::file_time_type t, <span class="hljs-type">double</span> r)
+            : <span class="hljs-built_in">path</span>(p), <span class="hljs-built_in">mtime</span>(t), <span class="hljs-built_in">ratio</span>(r) {}
+            
+        fs::path path; 
+        fs::file_time_type mtime;
+        <span class="hljs-type">double</span> ratio;
+    };
+
+    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">DirNode</span>
+    {
+        fs::path              absPath;
+        std::vector&lt;DirNode&gt;  subdirs; 
+        std::vector&lt;ImageInfo&gt; images;
+        std::<span class="hljs-type">size_t</span> totalImgs;
+    };
+
+    <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">GalleryGenerator</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path &amp;src, <span class="hljs-type">const</span> jl::LayoutConfig &amp;layout, <span class="hljs-type">const</span> fs::path &amp;out, <span class="hljs-type">const</span> fs::path &amp;assets, <span class="hljs-type">const</span> fs::path &amp;webroot)</span>
+    </span>{
+        m_srcRoot = fs::<span class="hljs-built_in">absolute</span>(src);
+        m_outRoot = fs::<span class="hljs-built_in">absolute</span>(out);
+        m_assets = assets;
+        m_albumTemplate = m_assets / <span class="hljs-string">&quot;templates&quot;</span> / <span class="hljs-string">&quot;album.html&quot;</span>;
+        m_photoTemplate = m_assets / <span class="hljs-string">&quot;templates&quot;</span> / <span class="hljs-string">&quot;photo.html&quot;</span>;
+        m_sentinelFile = m_outRoot / <span class="hljs-string">&quot;.gallery_sentine&quot;</span>;
+        m_srcLink = m_outRoot / <span class="hljs-string">&quot;_src&quot;</span>;
+        m_webRoot = webroot;
+
+        m_LayoutCfg = layout;
+        m_injaEnv.<span class="hljs-built_in">set_trim_blocks</span>(<span class="hljs-literal">true</span>);
+        m_injaEnv.<span class="hljs-built_in">set_lstrip_blocks</span>(<span class="hljs-literal">true</span>);
+
+        <span class="hljs-keyword">if</span> (!fs::<span class="hljs-built_in">is_directory</span>(m_srcRoot))
+        {
+            <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Error: {} is not a directory.&quot;</span>, m_srcRoot.<span class="hljs-built_in">c_str</span>());
+            std::<span class="hljs-built_in">abort</span>();
+        }
+
+        <span class="hljs-keyword">if</span> (!fs::<span class="hljs-built_in">exists</span>(m_albumTemplate) || !fs::<span class="hljs-built_in">exists</span>(m_photoTemplate))
+        {
+            <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Error: HTML template does not exist.&quot;</span>);
+            std::<span class="hljs-built_in">abort</span>();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">GenSite</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-built_in">ClearOutDir</span>();
+
+        fs::<span class="hljs-built_in">create_directories</span>(m_outRoot);
+        std::<span class="hljs-built_in">ofstream</span>(m_sentinelFile).<span class="hljs-built_in">close</span>();
+        fs::<span class="hljs-built_in">create_symlink</span>(m_srcRoot, m_srcLink);
+        fs::<span class="hljs-built_in">copy</span>(m_assets, m_outRoot, fs::copy_options::recursive);
+        fs::<span class="hljs-built_in">remove_all</span>(m_outRoot / <span class="hljs-string">&quot;templates&quot;</span>);
+
+        DirNode rootNode = <span class="hljs-built_in">BuildTree</span>(m_srcRoot);
+        <span class="hljs-built_in">GenDir</span>(rootNode);
+        <span class="hljs-built_in">Print</span>(stdout, <span class="hljs-string">&quot;[end] GenSite done.&quot;</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">const</span> fs::path &amp;<span class="hljs-title">GetSrcDir</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> m_srcRoot;
+    } 
+
+    <span class="hljs-function"><span class="hljs-type">const</span> fs::path &amp;<span class="hljs-title">GetOutDir</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> m_outRoot;
+    }
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ClearOutDir</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (fs::<span class="hljs-built_in">exists</span>(m_outRoot) &amp;&amp; !fs::<span class="hljs-built_in">exists</span>(m_sentinelFile))
+        {
+            <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Error: Output directory lacks sentinel — refusing to delete.&quot;</span>);
+            std::<span class="hljs-built_in">abort</span>();
+        }
+        fs::<span class="hljs-built_in">remove_all</span>(m_outRoot);
+    }
+
+    <span class="hljs-function">DirNode <span class="hljs-title">BuildTree</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; dir)</span>
+    </span>{
+        DirNode node;
+        node.absPath = dir;
+        node.images = <span class="hljs-built_in">CollectImages</span>(dir);
+        node.totalImgs = node.images.<span class="hljs-built_in">size</span>();
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; e : fs::<span class="hljs-built_in">directory_iterator</span>(dir))
+        {
+            <span class="hljs-keyword">if</span> (!e.<span class="hljs-built_in">is_directory</span>())
+                <span class="hljs-keyword">continue</span>;
+
+            <span class="hljs-keyword">auto</span> child = <span class="hljs-built_in">BuildTree</span>(e.<span class="hljs-built_in">path</span>());
+            node.totalImgs += child.totalImgs;
+            node.subdirs.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(child));
+        }
+
+        <span class="hljs-keyword">return</span> node;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">GenDir</span><span class="hljs-params">(DirNode&amp; node)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (node.subdirs.<span class="hljs-built_in">empty</span>())
+        {
+            <span class="hljs-built_in">GenPhotoPage</span>(node);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-built_in">GenAlbumPage</span>(node);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; sub : node.subdirs)
+            <span class="hljs-built_in">GenDir</span>(sub);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">GenAlbumPage</span><span class="hljs-params">(DirNode&amp; node)</span>
+    </span>{
+        <span class="hljs-comment">// 按照文件名称排序</span>
+        std::<span class="hljs-built_in">sort</span>(node.subdirs.<span class="hljs-built_in">begin</span>(), node.subdirs.<span class="hljs-built_in">end</span>(), [](DirNode&amp; a, DirNode&amp; b) {
+            <span class="hljs-keyword">return</span> a.absPath &lt; b.absPath;
+        });
+
+        json albums = json::<span class="hljs-built_in">array</span>();
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; sub : node.subdirs)
+        {
+            <span class="hljs-keyword">auto</span> &amp;e = albums.<span class="hljs-built_in">emplace_back</span>();
+            e[<span class="hljs-string">&quot;name&quot;</span>]  = sub.absPath.<span class="hljs-built_in">filename</span>().<span class="hljs-built_in">string</span>();
+            e[<span class="hljs-string">&quot;url&quot;</span>]   = <span class="hljs-built_in">GetWebIndexPath</span>(fs::<span class="hljs-built_in">relative</span>(sub.absPath, m_srcRoot));
+            e[<span class="hljs-string">&quot;count&quot;</span>] = sub.totalImgs;
+        }
+
+        <span class="hljs-keyword">auto</span> rel = fs::<span class="hljs-built_in">relative</span>(node.absPath, m_srcRoot);
+        json data;
+        data[<span class="hljs-string">&quot;root&quot;</span>]    = m_webRoot.<span class="hljs-built_in">generic_string</span>();
+        data[<span class="hljs-string">&quot;title&quot;</span>]   = (rel.<span class="hljs-built_in">empty</span>() || rel == <span class="hljs-string">&quot;.&quot;</span>) ? std::<span class="hljs-built_in">string</span>(<span class="hljs-string">&quot;Photo Gallery&quot;</span>) : node.absPath.<span class="hljs-built_in">filename</span>().<span class="hljs-built_in">string</span>();
+        data[<span class="hljs-string">&quot;albums&quot;</span>]  = std::<span class="hljs-built_in">move</span>(albums);
+        data[<span class="hljs-string">&quot;navbar&quot;</span>]  = <span class="hljs-built_in">BuildNavbar</span>(rel);
+
+        fs::path out = m_outRoot / rel;
+        fs::<span class="hljs-built_in">create_directories</span>(out);
+        <span class="hljs-function">std::ofstream <span class="hljs-title">ofs</span><span class="hljs-params">(out / <span class="hljs-string">&quot;index.html&quot;</span>)</span></span>;
+        ofs &lt;&lt; m_injaEnv.<span class="hljs-built_in">render_file</span>(m_albumTemplate, data);
+    }
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">GenPhotoPage</span><span class="hljs-params">(DirNode&amp; node)</span>
+    </span>{
+        <span class="hljs-comment">// 按照文件最后修改日期排序</span>
+        std::<span class="hljs-built_in">sort</span>(node.images.<span class="hljs-built_in">begin</span>(), node.images.<span class="hljs-built_in">end</span>(), [](<span class="hljs-type">const</span> ImageInfo&amp; a, <span class="hljs-type">const</span> ImageInfo&amp; b){
+            <span class="hljs-keyword">return</span> a.mtime &gt; b.mtime;
+        });
+
+        <span class="hljs-comment">// Build justified layout</span>
+        std::vector&lt;jl::InputItem&gt; items;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; img : node.images)
+            items.<span class="hljs-built_in">emplace_back</span>(img.ratio);
+        <span class="hljs-keyword">auto</span> layout = jl::<span class="hljs-built_in">compute</span>(items, m_LayoutCfg);
+
+        json photos = json::<span class="hljs-built_in">array</span>();
+        <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; node.images.<span class="hljs-built_in">size</span>(); ++i)
+        {
+            <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; box = layout.boxes[i];
+            json &amp;p = photos.<span class="hljs-built_in">emplace_back</span>();
+
+            p[<span class="hljs-string">&quot;src&quot;</span>]    = <span class="hljs-built_in">GetWebImgPath</span>(fs::<span class="hljs-built_in">relative</span>(node.images[i].path, m_srcRoot));
+            p[<span class="hljs-string">&quot;name&quot;</span>]   = node.images[i].path.<span class="hljs-built_in">filename</span>().<span class="hljs-built_in">string</span>();
+            p[<span class="hljs-string">&quot;top&quot;</span>]    = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">round</span>(box.top);
+            p[<span class="hljs-string">&quot;left&quot;</span>]   = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">round</span>(box.left);
+            p[<span class="hljs-string">&quot;width&quot;</span>]  = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">round</span>(box.width);
+            p[<span class="hljs-string">&quot;height&quot;</span>] = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">round</span>(box.height);
+        }
+
+        <span class="hljs-keyword">auto</span> rel = fs::<span class="hljs-built_in">relative</span>(node.absPath, m_srcRoot);
+        json data;
+        data[<span class="hljs-string">&quot;root&quot;</span>]       = m_webRoot.<span class="hljs-built_in">generic_string</span>();
+        data[<span class="hljs-string">&quot;title&quot;</span>]      = node.absPath.<span class="hljs-built_in">filename</span>().<span class="hljs-built_in">string</span>();
+        data[<span class="hljs-string">&quot;count&quot;</span>]      = node.totalImgs;
+        data[<span class="hljs-string">&quot;containerW&quot;</span>] = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">ceil</span>(m_LayoutCfg.containerWidth);
+        data[<span class="hljs-string">&quot;containerH&quot;</span>] = (<span class="hljs-type">int</span>)std::<span class="hljs-built_in">ceil</span>(layout.containerHeight);
+        data[<span class="hljs-string">&quot;photos&quot;</span>]     = std::<span class="hljs-built_in">move</span>(photos);
+        data[<span class="hljs-string">&quot;navbar&quot;</span>]     = <span class="hljs-built_in">BuildNavbar</span>(rel);
+
+        <span class="hljs-keyword">auto</span> out = m_outRoot / rel;
+        fs::<span class="hljs-built_in">create_directories</span>(out);
+        <span class="hljs-function">std::ofstream <span class="hljs-title">ofs</span><span class="hljs-params">(out / <span class="hljs-string">&quot;index.html&quot;</span>)</span></span>;
+        ofs &lt;&lt; m_injaEnv.<span class="hljs-built_in">render_file</span>(m_photoTemplate, data);
+    }
+
+    <span class="hljs-function">json <span class="hljs-title">BuildNavbar</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path &amp;rel)</span> 
+    </span>{
+        json navbar = json::<span class="hljs-built_in">array</span>();
+        fs::path acc;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;part : rel)
+        {
+            <span class="hljs-keyword">if</span> (part == <span class="hljs-string">&quot;.&quot;</span>) <span class="hljs-keyword">continue</span>;
+            acc /= part;
+            <span class="hljs-keyword">auto</span> &amp;crumb = navbar.<span class="hljs-built_in">emplace_back</span>();
+            crumb[<span class="hljs-string">&quot;name&quot;</span>] = part.<span class="hljs-built_in">string</span>();
+            crumb[<span class="hljs-string">&quot;url&quot;</span>]  = <span class="hljs-built_in">GetWebIndexPath</span>(acc);
+        }
+        <span class="hljs-keyword">return</span> navbar;
+    }
+
+    <span class="hljs-function">std::vector&lt;ImageInfo&gt; <span class="hljs-title">CollectImages</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; dir)</span>
+    </span>{
+        std::vector&lt;ImageInfo&gt; imgs;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; e : fs::<span class="hljs-built_in">directory_iterator</span>(dir))
+        {
+            <span class="hljs-keyword">if</span> (!e.<span class="hljs-built_in">is_regular_file</span>())
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">IsImage</span>(e.<span class="hljs-built_in">path</span>()))
+                <span class="hljs-keyword">continue</span>;
+            imgs.<span class="hljs-built_in">emplace_back</span>(e.<span class="hljs-built_in">path</span>(), e.<span class="hljs-built_in">last_write_time</span>(), <span class="hljs-built_in">GetImgRatio</span>(e.<span class="hljs-built_in">path</span>()));
+        }
+        
+        <span class="hljs-keyword">return</span> imgs;
+    }
+
+    <span class="hljs-function">std::string <span class="hljs-title">GetWebImgPath</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; rel)</span>
+    </span>{
+        fs::path path = m_webRoot / <span class="hljs-string">&quot;_src&quot;</span> / rel;
+        <span class="hljs-keyword">return</span> path.<span class="hljs-built_in">generic_string</span>();
+    }
+
+    <span class="hljs-function">std::string <span class="hljs-title">GetWebIndexPath</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; rel)</span>
+    </span>{
+        fs::path path = m_webRoot / rel / <span class="hljs-string">&quot;index.html&quot;</span>;
+        <span class="hljs-keyword">return</span> path.<span class="hljs-built_in">generic_string</span>();
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">GetImgRatio</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path &amp;path)</span>
+    </span>{
+        <span class="hljs-keyword">auto</span> it = m_ImgRatioMap.<span class="hljs-built_in">find</span>(path.<span class="hljs-built_in">generic_string</span>());
+        <span class="hljs-keyword">if</span> (it != m_ImgRatioMap.<span class="hljs-built_in">end</span>())
+            <span class="hljs-keyword">return</span> it-&gt;second;
+
+        <span class="hljs-keyword">auto</span> size = imgsize::<span class="hljs-built_in">from_file</span>(path.<span class="hljs-built_in">c_str</span>());
+        <span class="hljs-keyword">if</span> (!size)
+        {
+            <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Error: Failed to get image info: {}&quot;</span>, path.<span class="hljs-built_in">c_str</span>());
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>;
+        }
+
+        <span class="hljs-type">double</span> ratio = <span class="hljs-built_in">double</span>(size-&gt;width)/size-&gt;height;
+        m_ImgRatioMap.<span class="hljs-built_in">emplace</span>(path.<span class="hljs-built_in">generic_string</span>(), ratio);
+        <span class="hljs-keyword">return</span> ratio;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">IsImage</span><span class="hljs-params">(<span class="hljs-type">const</span> fs::path&amp; p)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> IMAGE_EXTS.<span class="hljs-built_in">contains</span>(p.<span class="hljs-built_in">extension</span>().<span class="hljs-built_in">string</span>());
+    }
+
+
+    fs::path m_srcRoot;
+    fs::path m_outRoot;
+    fs::path m_assets;
+    fs::path m_albumTemplate;
+    fs::path m_photoTemplate;
+    fs::path m_sentinelFile;
+    fs::path m_srcLink;
+    fs::path m_webRoot;
+    
+    jl::LayoutConfig m_LayoutCfg;
+    inja::Environment m_injaEnv;
+
+    std::unordered_map&lt;std::string, <span class="hljs-type">double</span>&gt; m_ImgRatioMap;
+};
+
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span>
+</span>{
+    <span class="hljs-function">ArgsParser <span class="hljs-title">args</span><span class="hljs-params">(argc, argv)</span></span>;
+    <span class="hljs-keyword">if</span> (!args.<span class="hljs-built_in">Has</span>(<span class="hljs-string">&quot;-src&quot;</span>) || !args.<span class="hljs-built_in">Has</span>(<span class="hljs-string">&quot;-out&quot;</span>))
+    {
+        <span class="hljs-built_in">Print</span>(stderr, <span class="hljs-string">&quot;Usage: {} -src=dir -out=dir [-update=0] [-maxw=1800] [-maxh=500] [-assets=assets] [-webroot=/]&quot;</span>, args.<span class="hljs-built_in">GetCmdName</span>());
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    fs::path srcRoot = args.<span class="hljs-built_in">Get</span>&lt;std::string&gt;(<span class="hljs-string">&quot;-src&quot;</span>);
+    fs::path outRoot = args.<span class="hljs-built_in">Get</span>&lt;std::string&gt;(<span class="hljs-string">&quot;-out&quot;</span>);
+    fs::path assets = args.<span class="hljs-built_in">Get</span>&lt;std::string&gt;(<span class="hljs-string">&quot;-assets&quot;</span>, ASSETSDIR);
+    fs::path webroot = args.<span class="hljs-built_in">Get</span>&lt;std::string&gt;(<span class="hljs-string">&quot;-webroot&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>);
+    <span class="hljs-type">int</span> updateInterval = args.<span class="hljs-built_in">Get</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-string">&quot;-update&quot;</span>, <span class="hljs-number">0</span>);
+
+    jl::LayoutConfig LayoutCfg;
+    LayoutCfg.containerWidth            = args.<span class="hljs-built_in">Get</span>&lt;<span class="hljs-type">double</span>&gt;(<span class="hljs-string">&quot;-maxw&quot;</span>, MAXWIDTH);
+    LayoutCfg.targetRowHeight           = args.<span class="hljs-built_in">Get</span>&lt;<span class="hljs-type">double</span>&gt;(<span class="hljs-string">&quot;-maxh&quot;</span>, MAXHEIGHT);
+    LayoutCfg.targetRowHeightTolerance  = <span class="hljs-number">0.25</span>;
+    LayoutCfg.containerPadding          = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+    LayoutCfg.boxSpacing                = {<span class="hljs-number">6</span>, <span class="hljs-number">6</span>};
+    LayoutCfg.showWidows                = <span class="hljs-literal">true</span>;
+    LayoutCfg.widowLayoutStyle          = jl::WidowLayoutStyle::Left;
+
+    <span class="hljs-function">FileCounter <span class="hljs-title">fCounter</span><span class="hljs-params">(srcRoot)</span></span>;
+    <span class="hljs-function">GalleryGenerator <span class="hljs-title">Gallery</span><span class="hljs-params">(srcRoot, LayoutCfg, outRoot, assets, webroot)</span></span>;
+
+    <span class="hljs-built_in">Print</span>(stdout, <span class="hljs-string">&quot;[start] photos={} output={} updateInterval={}(seconds)&quot;</span>, srcRoot.<span class="hljs-built_in">c_str</span>(), outRoot.<span class="hljs-built_in">c_str</span>(), updateInterval);
+    
+    <span class="hljs-keyword">if</span> (updateInterval &lt; <span class="hljs-number">1</span>)
+    {
+        Gallery.<span class="hljs-built_in">GenSite</span>();
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-type">size_t</span> count = fCounter.<span class="hljs-built_in">GetLastCount</span>();
+        <span class="hljs-keyword">if</span> (fCounter.<span class="hljs-built_in">IsChanged</span>() || !fs::<span class="hljs-built_in">exists</span>(Gallery.<span class="hljs-built_in">GetOutDir</span>()))
+        {
+            <span class="hljs-built_in">Print</span>(stdout, <span class="hljs-string">&quot;[update] fileCount changed: {} -&gt; {}&quot;</span>, count, fCounter.<span class="hljs-built_in">GetLastCount</span>());
+            Gallery.<span class="hljs-built_in">GenSite</span>();
+        }
+
+        std::this_thread::<span class="hljs-built_in">sleep_for</span>(std::chrono::<span class="hljs-built_in">seconds</span>(updateInterval));
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+</code></pre></div></section></div>
 <h2 id="table" tabindex="-1">Table <a class="header-anchor" href="#table">#</a></h2>
 <table>
 <thead>
@@ -167,8 +1089,8 @@ BE_VERBOSE=<span class="hljs-literal">false</span>
 <span class="hljs-punctuation">]</span>
 </code></pre>
 <h2 id="footnotes" tabindex="-1">Footnotes <a class="header-anchor" href="#footnotes">#</a></h2>
-<p>Here is a simple footnote<sup class="footnote-ref"><a href="#footnote1">[1]</a><a class="footnote-anchor" id="footnote-ref1" /></sup>.<br>
-The footnote will appear at the bottom<sup class="footnote-ref"><a href="#footnote2">[2]</a><a class="footnote-anchor" id="footnote-ref2" /></sup>.</p>
+<p>Here is a simple footnote<sup class="footnote-ref"><a href="#footnote1">[1]</a><a class="footnote-anchor" id="footnote-ref1"></a></sup>.<br>
+The footnote will appear at the bottom<sup class="footnote-ref"><a href="#footnote2">[2]</a><a class="footnote-anchor" id="footnote-ref2"></a></sup>.</p>
 <h2 id="collapsed-sections" tabindex="-1">Collapsed sections <a class="header-anchor" href="#collapsed-sections">#</a></h2>
 <details>
 <summary>Click to expand</summary>
@@ -184,24 +1106,36 @@ You can temporarily obscure sections of your Markdown by creating a collapsed se
     <button type="button" class="tabs-tab-button" data-tab="2">orange</button>
   </div>
   <div class="tabs-tabs-container">
-<div class="tabs-tab-content active" data-index="0" data-active=""><p>This is Apple!</p>
-</div><div class="tabs-tab-content" data-index="1"><p>This is Banana!</p>
-</div><div class="tabs-tab-content" data-index="2"><p>This is Orange!</p>
+<div class="tabs-tab-content active" data-index="0" data-active="">
+<p>This is Apple!</p>
+</div>
+<div class="tabs-tab-content" data-index="1">
+<p>This is Banana!</p>
+</div>
+<div class="tabs-tab-content" data-index="2">
+<p>This is Orange!</p>
 </div>
   </div>
-</div><div class="tabs-tabs-wrapper">
+</div>
+<div class="tabs-tabs-wrapper">
   <div class="tabs-tabs-header">
     <button type="button" class="tabs-tab-button" data-tab="0">aa</button>
     <button type="button" class="tabs-tab-button active" data-tab="1" data-active>bb</button>
     <button type="button" class="tabs-tab-button" data-tab="2">cc</button>
   </div>
   <div class="tabs-tabs-container">
-<div class="tabs-tab-content" data-index="0"><p>aaa</p>
-</div><div class="tabs-tab-content active" data-index="1" data-active=""><p>bbb</p>
-</div><div class="tabs-tab-content" data-index="2"><p>ccc</p>
+<div class="tabs-tab-content" data-index="0">
+<p>aaa</p>
+</div>
+<div class="tabs-tab-content active" data-index="1" data-active="">
+<p>bbb</p>
+</div>
+<div class="tabs-tab-content" data-index="2">
+<p>ccc</p>
 </div>
   </div>
-</div><h2 id="alerts" tabindex="-1">Alerts <a class="header-anchor" href="#alerts">#</a></h2>
+</div>
+<h2 id="alerts" tabindex="-1">Alerts <a class="header-anchor" href="#alerts">#</a></h2>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
 <p>Useful information that users should know, even when skimming content.</p>
@@ -288,6 +1222,7 @@ You can temporarily obscure sections of your Markdown by creating a collapsed se
 
    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
    <script defer src="/markhub/assets/js/main.js"></script>
+   <script defer src="/markhub/assets/js/mdit-explorer.js"></script>
 </body>
 </html>
 
