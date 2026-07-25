@@ -44,9 +44,11 @@ site:
     - 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'
     - '/markhub/assets/css/highlight-github.css'
     - '/markhub/assets/css/main.css'
+    - '/markhub/assets/css/mdit-explorer.css'
   js:
     - 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'
     - '/markhub/assets/js/main.js'
+    - '/markhub/assets/js/mdit-explorer.js'
 
 ## The name and link of the navigation menu.
 navigation:

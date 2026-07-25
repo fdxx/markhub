@@ -1,7 +1,7 @@
 {
   "name": "markhub",
   "description": "https://github.com/fdxx/markhub",
-  "version": "0.2",
+  "version": "0.3.0",
   "author": "fdxx",
   "license": "GPLv3",
   "type": "module",
@@ -11,17 +11,18 @@
     "url": "https://github.com/fdxx/markhub.git"
   },
   "dependencies": {
-    "@mdit/plugin-alert": "^0.13.0",
-    "@mdit/plugin-footnote": "^0.13.0",
-    "@mdit/plugin-img-lazyload": "^0.13.0",
-    "@mdit/plugin-katex": "^0.13.1",
-    "@mdit/plugin-tab": "^0.13.0",
-    "@mdit/plugin-tasklist": "^0.13.0",
-    "ejs": "^3.1.10",
-    "highlight.js": "^11.10.0",
-    "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.2.0",
+    "@mdit/plugin-alert": "^1.0.1",
+    "@mdit/plugin-footnote": "^1.0.1",
+    "@mdit/plugin-img-lazyload": "^1.0.1",
+    "@mdit/plugin-katex": "^1.0.1",
+    "@mdit/plugin-tab": "^1.0.1",
+    "@mdit/plugin-tasklist": "^1.0.1",
+    "ejs": "^6.0.1",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.3.0",
+    "markdown-it-anchor": "^9.2.1",
+    "mdit-explorer": "github:fdxx/mdit-explorer",
     "minimist": "^1.2.8",
-    "yaml": "^2.5.0"
+    "yaml": "^2.9.0"
   }
 }

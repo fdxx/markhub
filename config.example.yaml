@@ -41,11 +41,13 @@ site:
     - 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.6.1/github-markdown.min.css'
     - 'https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css'
     - 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'
-    - '/markhub/assets/css/highlight-github.css'
-    - '/markhub/assets/css/main.css'
+    - '/assets/css/highlight-github.css'
+    - '/assets/css/main.css'
+    - '/assets/css/mdit-explorer.css'
   js:
     - 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'
-    - '/markhub/assets/js/main.js'
+    - '/assets/js/main.js'
+    - '/assets/js/mdit-explorer.js'
 
 ## The name and link of the navigation menu.
 navigation:

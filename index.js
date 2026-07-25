@@ -12,6 +12,7 @@ import YAML from 'yaml';
 import ejs from 'ejs';
 import ArgsParser from 'minimist';
 import anchor from 'markdown-it-anchor';
+import explorer from 'mdit-explorer';
 
 
 const __dirname = import.meta.dirname;
@@ -99,6 +100,7 @@ const mdrenderer = markdownit({ html: true, highlight: HighlighHandle })
 	.use(tab, { name: "tabs" })
 	.use(imgLazyload)
 	.use(katex)
+	.use(explorer)
 	.use(anchor, {
 		level: [1,2],
 		permalink: anchor.permalink.linkInsideHeader()

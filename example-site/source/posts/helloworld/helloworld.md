@@ -66,6 +66,14 @@ Link to the [github.](https://github.com)
 - [x] https://github.com/microsoft/vscode/issues/224902
 - [ ] Add delight to the experience when all tasks are complete
 
+
+## Explorer
+
+::: explorer source/posts/helloworld/explorer-test
+open=include/ArgsParser.hpp
+:::
+
+
 ## Table
 | Left-aligned | Center-aligned | Right-aligned |
 | :---         |     :---:      |          ---: |
