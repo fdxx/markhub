@@ -69,8 +69,11 @@ Link to the [github.](https://github.com)
 
 ## Explorer
 
-::: explorer source/posts/helloworld/explorer-test
-open=include/ArgsParser.hpp
+::: explorer https://github.com/fdxx/mdit-explorer.git
+defaultopen=README.md
+addfile=README.md
+addfile=package.json
+addfile=src/index.js
 :::
 
 

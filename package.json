@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/fdxx/markhub.git"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "@mdit/plugin-alert": "^1.0.1",
     "@mdit/plugin-footnote": "^1.0.1",
